@@ -1,3 +1,4 @@
+import os
 import torch
 import logging
 from ast import literal_eval
@@ -52,10 +53,12 @@ class S2SConformerFastSpeech2Model(S2TConformerModel):
 
         base_model = cls(encoder, decoder)
         if getattr(args, "load_pretrained_s2t_from", None):
-            state_dict = checkpoint_utils.load_checkpoint_to_cpu(args.load_pretrained_s2t_from)["model"]
-            load_pretrained_component(base_model.encoder, state_dict, "encoder")
-            load_pretrained_component(base_model.decoder, state_dict, "decoder")
-        base_model.st_freezing_updates = getattr(args, "st_freezing_updates", 0)
+            if os.path.exists(args.load_pretrained_s2t_from):
+                state_dict = checkpoint_utils.load_checkpoint_to_cpu(args.load_pretrained_s2t_from)["model"]
+                load_pretrained_component(base_model.encoder, state_dict, "encoder")
+                load_pretrained_component(base_model.decoder, state_dict, "decoder")
+            else:
+                logger.warning(f"Path to pretrained s2t model not found: {args.load_pretrained_s2t_from}")
         base_model.num_updates = 0
         
         base_model.tts = FastSpeech2StyleEncoder(
@@ -65,15 +68,21 @@ class S2SConformerFastSpeech2Model(S2TConformerModel):
             embed_tokens=None,
         )
         if getattr(args, "load_pretrained_fastspeech_from", None):
-            state_dict = checkpoint_utils.load_checkpoint_to_cpu(args.load_pretrained_fastspeech_from)["model"]
-            load_pretrained_component(base_model.tts, state_dict, "tts")
+            if os.path.exists(args.load_pretrained_fastspeech_from):
+                state_dict = checkpoint_utils.load_checkpoint_to_cpu(args.load_pretrained_fastspeech_from)["model"]
+                load_pretrained_component(base_model.tts, state_dict, "tts")
+            else:
+                logger.warning(f"Path to pretrained fastspeech2 model not found: {args.load_pretrained_fastspeech_from}")
         
         base_model.multiscale_modeling = args.multiscale_modeling
         if args.multiscale_modeling:
             base_model.w2p_adaptor = CtcAdaptor(args, task.target_dictionary, task.target_dictionary_tts)
             if getattr(args, "load_pretrained_ctc_from", None):
-                state_dict = checkpoint_utils.load_checkpoint_to_cpu(args.load_pretrained_ctc_from)["model"]
-                load_pretrained_component(base_model.w2p_adaptor, state_dict, "w2p_adaptor")
+                if os.path.exists(args.load_pretrained_ctc_from):
+                    state_dict = checkpoint_utils.load_checkpoint_to_cpu(args.load_pretrained_ctc_from)["model"]
+                    load_pretrained_component(base_model.w2p_adaptor, state_dict, "w2p_adaptor")
+                else:
+                    logger.warning(f"Path to pretrained ctc model not found: {args.load_pretrained_ctc_from}")
             logger.info(f"Build word-to-phoneme adaptor for multiscale modeling.")
 
         return base_model
