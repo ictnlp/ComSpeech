@@ -1,6 +1,6 @@
-exp=s2st.de-en.comspeech-zs
+exp=s2st.es-en.comspeech
 
-ROOT=~/speech2speech
+ROOT=~/ComSpeech
 output_dir=ComSpeech/results/$exp
 checkpoint_dir=ComSpeech/checkpoints/$exp
 
@@ -9,9 +9,9 @@ python fairseq/scripts/average_checkpoints.py \
     --output $checkpoint_dir/average_best_checkpoint.pt
 
 python ComSpeech/generator/generate_features.py \
-    data/comspeech/cvss_de_en/s2s \
+    data/comspeech/cvss_es_en/s2s \
     --user-dir ComSpeech \
-    --config-yaml config.yaml --gen-subset test.full --task comspeech_task \
+    --config-yaml config_sup.yaml --gen-subset test.full --task comspeech_task \
     --validate-task s2st --max-tokens 40000 \
     --path $checkpoint_dir/average_best_checkpoint.pt \
     --required-batch-size-multiple 1 \
@@ -33,5 +33,5 @@ cd $ROOT/asr_bleu/
 python compute_asr_bleu.py \
   --lang en \
   --audio_dirpath $ROOT/$output_dir/wav \
-  --reference_path $ROOT/data/comspeech/cvss_de_en/s2s/test.txt \
+  --reference_path $ROOT/data/comspeech/cvss_es_en/s2s/test.txt \
   --reference_format txt
