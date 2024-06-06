@@ -1,0 +1,6 @@
+[submodule "fairseq"]
+	path = fairseq
+	url = https://github.com/facebookresearch/fairseq
+[submodule "hifi-gan"]
+	path = hifi-gan
+	url = https://github.com/jik876/hifi-gan
