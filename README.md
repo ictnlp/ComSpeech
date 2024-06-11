@@ -69,7 +69,7 @@ bash ComSpeech/test_scripts/generate.fr-en.comspeech.sh
 ```
 
 > [!Note] 
-> To run inference, you need to download the pretrained VCTK_V1 vocoder from [this link](https://drive.google.com/drive/folders/1vJlfkwR7Uyheq2U5HrPnfTm-tzwuNuey) and place it in the `hifi-gan/` directory. 
+> To run inference, you need to download the pretrained HiFi-GAN vocoder from [this link](https://drive.google.com/drive/folders/1vJlfkwR7Uyheq2U5HrPnfTm-tzwuNuey) and place it in the `hifi-gan/` directory. 
 
 ### ComSpeech-ZS (Zero-shot Learning)
 
