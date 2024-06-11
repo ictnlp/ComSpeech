@@ -4,9 +4,9 @@
 [![project](https://img.shields.io/badge/%F0%9F%8E%A7%20Demo-Listen%20to%20ComSpeech-orange.svg)](https://ictnlp.github.io/ComSpeech-Site/)
 
 
-> **[Qingkai Fang](https://fangqingkai.github.io/), [Shaolei Zhang](https://zhangshaolei1998.github.io/), [Zhengrui Ma](https://scholar.google.com.hk/citations?user=dUgq6tEAAAAJ), [Min Zhang](https://scholar.google.com.hk/citations?user=CncXH-YAAAAJ), [Yang Feng*](https://people.ucas.edu.cn/~yangfeng?language=en)**
+> **Authors: [Qingkai Fang](https://fangqingkai.github.io/), [Shaolei Zhang](https://zhangshaolei1998.github.io/), [Zhengrui Ma](https://scholar.google.com.hk/citations?user=dUgq6tEAAAAJ), [Min Zhang](https://scholar.google.com.hk/citations?user=CncXH-YAAAAJ), [Yang Feng*](https://people.ucas.edu.cn/~yangfeng?language=en)**
 
-Code for ACL 2024 paper "[Can We Achieve High-quality Direct Speech-to-Speech Translation Without Parallel Speech Data?](https://arxiv.org)".
+Code for ACL 2024 paper "[Can We Achieve High-quality Direct Speech-to-Speech Translation without Parallel Speech Data?](https://arxiv.org)".
 
 ![](assets/ComSpeech-ZS.png)
 
@@ -14,13 +14,13 @@ Code for ACL 2024 paper "[Can We Achieve High-quality Direct Speech-to-Speech Tr
   🎧 Listen to <a href="https://ictnlp.github.io/ComSpeech-Site/">ComSpeech's translated speech</a> 🎧 
 </p>
 
-## 💡Highlights
+## 💡 Highlights
 
 1. ComSpeech is a general composite S2ST model architecture, which can **seamlessly integrate any pretrained S2TT and TTS models into a direct S2ST model**.
 2. ComSpeech surpasses previous two-pass models like UnitY and Translatotron 2 **in both translation quality and decoding speed**.
 3. With our proposed training strategy **ComSpeech-ZS**, we **achieve performance comparable to supervised training without using any parallel speech data**.
 
-## 🔥Quick Start
+## 🔥 Quick Start
 
 ### Requirements
 
@@ -68,7 +68,8 @@ bash ComSpeech/train_scripts/s2st/train.s2st.fr-en.comspeech.sh
 bash ComSpeech/test_scripts/generate.fr-en.comspeech.sh
 ```
 
-> [!Note] To run inference, you need to download the pretrained VCTK_V1 vocoder from [this link](https://drive.google.com/drive/folders/1vJlfkwR7Uyheq2U5HrPnfTm-tzwuNuey) and place it in the `hifi-gan/` directory. 
+> [!Note] 
+> To run inference, you need to download the pretrained VCTK_V1 vocoder from [this link](https://drive.google.com/drive/folders/1vJlfkwR7Uyheq2U5HrPnfTm-tzwuNuey) and place it in the `hifi-gan/` directory. 
 
 ### ComSpeech-ZS (Zero-shot Learning)
 
@@ -106,9 +107,25 @@ bash ComSpeech/test_scripts/generate.fr-en.comspeech-zs.sh
 
 ### Checkpoints
 
-<!-- We have released the checkpoints for each of the above steps. You can download and directly run them. -->
+We have released the checkpoints for each of the above steps. You can download them from 🤗[HuggingFace](https://huggingface.co/ICTNLP/ComSpeech_Models).
 
-## 🖋Citation
+#### Supervised Learning
+
+| Directions | S2TT Pretrain                                                | TTS Pretrain                                                 | ComSpeech                                                    |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Fr-En      | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.fr-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/tts.fastspeech2.cvss-fr-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/s2st.fr-en.comspeech/average_best_checkpoint.pt?download=true)] |
+| De-En      | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.de-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/tts.fastspeech2.cvss-de-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/s2st.de-en.comspeech/average_best_checkpoint.pt?download=true)] |
+| Es-En      | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.es-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/tts.fastspeech2.cvss-es-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/s2st.es-en.comspeech/average_best_checkpoint.pt?download=true)] |
+
+#### Zero-shot Learning
+
+| Directions | S2TT Pretrain                                                | TTS Pretrain                                                 | 1-stage Finetune                                             | 2-stage Finetune                                             |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Fr-En      | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.fr-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/tts.fastspeech2.cvss-x-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.fr-en.ctc/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/s2st.fr-en.comspeech-zs/average_best_checkpoint.pt?download=true)] |
+| De-En      | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.de-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/tts.fastspeech2.cvss-x-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.de-en.ctc/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/s2st.de-en.comspeech-zs/average_best_checkpoint.pt?download=true)] |
+| Es-En      | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.es-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/tts.fastspeech2.cvss-x-en/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/st.cvss.es-en.ctc/checkpoint_best.pt?download=true)] | [[download](https://huggingface.co/ICTNLP/ComSpeech_Models/resolve/main/checkpoints/s2st.es-en.comspeech-zs/average_best_checkpoint.pt?download=true)] |
+
+## 🖋 Citation
 
 If you have any questions, please feel free to submit an issue or contact `fangqingkai21b@ict.ac.cn`.
 
