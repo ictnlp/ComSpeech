@@ -2,7 +2,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2406.07289-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2406.07289)
 [![project](https://img.shields.io/badge/%F0%9F%8E%A7%20Demo-Listen%20to%20ComSpeech-orange.svg)](https://ictnlp.github.io/ComSpeech-Site/)
-
+[![model](https://img.shields.io/badge/%F0%9F%A4%97%20-ComSpeech_Models-blue.svg)](https://huggingface.co/ICTNLP/ComSpeech_Models/tree/main)
 
 > **Authors: [Qingkai Fang](https://fangqingkai.github.io/), [Shaolei Zhang](https://zhangshaolei1998.github.io/), [Zhengrui Ma](https://scholar.google.com.hk/citations?user=dUgq6tEAAAAJ), [Min Zhang](https://scholar.google.com.hk/citations?user=CncXH-YAAAAJ), [Yang Feng*](https://people.ucas.edu.cn/~yangfeng?language=en)**
 
