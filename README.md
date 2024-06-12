@@ -2,7 +2,8 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2406.07289-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2406.07289)
 [![project](https://img.shields.io/badge/%F0%9F%8E%A7%20Demo-Listen%20to%20ComSpeech-orange.svg)](https://ictnlp.github.io/ComSpeech-Site/)
-[![model](https://img.shields.io/badge/%F0%9F%A4%97%20-ComSpeech_Models-blue.svg)](https://huggingface.co/ICTNLP/ComSpeech_Models/tree/main)
+[![model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-ComSpeech_Models-blue.svg)](https://huggingface.co/ICTNLP/ComSpeech_Models/tree/main)
+[![code](https://img.shields.io/badge/Github-Codes-keygen.svg?logo=github)](https://github.com/ictnlp/ComSpeech)
 
 > **Authors: [Qingkai Fang](https://fangqingkai.github.io/), [Shaolei Zhang](https://zhangshaolei1998.github.io/), [Zhengrui Ma](https://scholar.google.com.hk/citations?user=dUgq6tEAAAAJ), [Min Zhang](https://scholar.google.com.hk/citations?user=CncXH-YAAAAJ), [Yang Feng*](https://people.ucas.edu.cn/~yangfeng?language=en)**
 
@@ -19,6 +20,13 @@ Code for ACL 2024 paper "[Can We Achieve High-quality Direct Speech-to-Speech Tr
 1. ComSpeech is a general composite S2ST model architecture, which can **seamlessly integrate any pretrained S2TT and TTS models into a direct S2ST model**.
 2. ComSpeech surpasses previous two-pass models like UnitY and Translatotron 2 **in both translation quality and decoding speed**.
 3. With our proposed training strategy **ComSpeech-ZS**, we **achieve performance comparable to supervised training without using any parallel speech data**.
+
+We also have some projects on speech-to-speech translation that you might be interested in:
+
+1. **StreamSpeech (ACL 2024)**: An "All in One" seamless model for offline and simultaneous speech recognition, speech translation and speech synthesis. [![arXiv](https://img.shields.io/badge/paper-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2406.03049) [![code](https://img.shields.io/badge/code-666666.svg?logo=github)](https://github.com/ictnlp/StreamSpeech)
+2. **NAST-S2x (ACL 2024)**: A fast and end-to-end simultaneous speech-to-text/speech translation model. [![arXiv](https://img.shields.io/badge/paper-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2406.06937v1) [![code](https://img.shields.io/badge/code-666666.svg?logo=github)](https://github.com/ictnlp/NAST-S2x)
+3. **DASpeech (NeurIPS 2023)**: An non-autoregressive two-pass direct speech-to-speech translation model with high-quality translations and fast decoding speed. [![arXiv](https://img.shields.io/badge/paper-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2310.07403) [![code](https://img.shields.io/badge/code-666666.svg?logo=github)](https://github.com/ictnlp/DASpeech)
+4. **CTC-S2UT (ACL 2024 Findings)**: An non-autoregressive textless speech-to-speech translation model with up to 26.81× decoding speedup. [![arXiv](https://img.shields.io/badge/paper-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2406.07330) [![code](https://img.shields.io/badge/code-666666.svg?logo=github)](https://github.com/ictnlp/CTC-S2UT)
 
 ## 🔥 Quick Start
 
