@@ -42,8 +42,53 @@ We also have some other projects on **speech-to-speech translation** that you mi
 
 ### Data Preparation
 
-> [!Note] 
-> This section is under construction and will be updated within 3 days.
+1. Download [CoVoST 2](https://github.com/facebookresearch/covost) Fr/De/Es-En and [CVSS-C](https://github.com/google-research-datasets/cvss) X-En (21 languages in total) datasets and place them in the `data/` directory. 
+
+2. Download our released data manifests from 🤗[Huggingface](https://huggingface.co/datasets/ICTNLP/ComSpeech_Datasets/tree/main), and also place them in the `data/` directory. The directory should be like the following:
+
+```
+data
+├── comspeech
+│   ├── cvss_de_en
+│   ├── cvss_es_en
+│   ├── cvss_fr_en
+│   └── cvss_x_en
+├── covost2
+│   └── fr
+│       ├── clips
+│       ├── dev.tsv
+│       ├── invalidated.tsv
+│       ├── other.tsv
+│       ├── test.tsv
+│       ├── train.tsv
+│       └── validated.tsv
+└── cvss-c
+    └── fr-en
+        └── mfa.tar.gz
+```
+
+3. Extract fbank features for the source speech.
+
+```bash
+for src_lang in fr de es; do
+    python ComSpeech/data_preparation/extract_src_features.py \
+        --cvss-data-root data/cvss-c/ \
+        --covost-data-root data/covost2/ \
+        --output-root data/cvss-c/${src_lang}-en/src \
+        --src-lang $src_lang
+done
+```
+
+4. Extract mel-spectrogram, duration, pitch, and energy information for the target speech.
+
+```bash
+for src_lang in ar ca cy de es et fa fr id it ja lv mn nl pt ru sl sv-SE ta tr zh-CN; do
+    python ComSpeech/data_preparation/extract_tgt_features.py \
+        --audio-manifest-root data/cvss-c/${src_lang}-en/ \
+        --output-root data/cvss-c/${src_lang}-en/tts \
+        --textgrid-dir data/cvss-c/${src_lang}-en/mfa_align/speaker/
+done
+```
 
 ### ComSpeech (Supervised Learning)
 
@@ -66,13 +111,13 @@ bash ComSpeech/train_scripts/tts/train.tts.fastspeech2.cvss-fr-en.sh
 
 3. Finetune the entire model using the S2ST data, and the chekpoints will be saved at `ComSpeech/checkpoints/s2st.fr-en.comspeech`.
 
-```
+```bash
 bash ComSpeech/train_scripts/s2st/train.s2st.fr-en.comspeech.sh
 ```
 
 4.  Average the 5 best checkpoints and test the results on the `test` set.
 
-```
+```bash
 bash ComSpeech/test_scripts/generate.fr-en.comspeech.sh
 ```
 
@@ -97,19 +142,19 @@ bash ComSpeech/train_scripts/tts/train.tts.fastspeech2.cvss-x-en.sh
 
 3. Finetune the S2TT model and the vocabulary adaptor using S2TT data (stage 1), and the best checkpoint will be saved at `ComSpeech/checkpoints/st.cvss.fr-en.ctc/checkpoint_best.pt`.
 
-```
+```bash
 bash ComSpeech/train_scripts/st/train.st.cvss.fr-en.ctc.sh
 ```
 
 4. Finetune the entire model using both S2TT and TTS data (stage 2), and the checkpoints will be saved at `ComSpeech/checkpoints/s2st.fr-en.comspeech-zs`.
 
-```
+```bash
 bash ComSpeech/train_scripts/s2st/train.s2st.fr-en.comspeech-zs.sh
 ```
 
 5. Average the 5 best checkpoints and test the results on the `test` set.
 
-```
+```bash
 bash ComSpeech/test_scripts/generate.fr-en.comspeech-zs.sh
 ```
 
