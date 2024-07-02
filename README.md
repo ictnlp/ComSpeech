@@ -83,11 +83,19 @@ done
 
 ```bash
 for src_lang in ar ca cy de es et fa fr id it ja lv mn nl pt ru sl sv-SE ta tr zh-CN; do
+    mkdir -p data/cvss-c/${src_lang}-en/mfa_align
+    tar -xzvf data/cvss-c/${src_lang}-en/mfa.tar.gz -C data/cvss-c/${src_lang}-en/mfa_align/
     python ComSpeech/data_preparation/extract_tgt_features.py \
         --audio-manifest-root data/cvss-c/${src_lang}-en/ \
         --output-root data/cvss-c/${src_lang}-en/tts \
         --textgrid-dir data/cvss-c/${src_lang}-en/mfa_align/speaker/
 done
+```
+
+5. Replace the path in files in the `data/comspeech/` directory.
+
+```bash
+python ComSpeech/data_preparation/fill_data.py
 ```
 
 ### ComSpeech (Supervised Learning)
